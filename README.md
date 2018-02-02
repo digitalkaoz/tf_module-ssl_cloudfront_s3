@@ -8,7 +8,7 @@
 
 > a certificate for your domain should already be deployed (cant be automated by terraform as of now)
 
-```hcl
+```tf
 module "ssl_cloudfront_s3" {
   source = "github.com/digitalkaoz/tf_module-ssl_cloudfront_s3"
 
@@ -24,7 +24,8 @@ module "ssl_cloudfront_s3" {
 }
 ```
 
-#TODO
+> see [example](./example/main.tf)
+# TODO
 
 * `kms` encryption for bucket?
 * automated cert creation
