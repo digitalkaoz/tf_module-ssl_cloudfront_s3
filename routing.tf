@@ -15,7 +15,7 @@ resource "aws_route53_record" "www" {
   zone_id = "${aws_route53_zone.web.id}"
 
   alias {
-    evaluate_target_health = false
+    evaluate_target_health = true
     name = "${aws_cloudfront_distribution.web.domain_name}"
     zone_id = "Z2FDTNDATAQYW2" #cloudfront default
   }
@@ -40,10 +40,8 @@ resource "aws_route53_record" "subdomain" {
   name = "${var.domain}"
   type = "CNAME"
   zone_id = "${data.aws_route53_zone.web.zone_id}"
-
-  alias {
-    evaluate_target_health = false
-    name = "${aws_cloudfront_distribution.web.domain_name}"
-    zone_id = "Z2FDTNDATAQYW2" #cloudfront default
-  }
+  ttl = 3600
+  records = [
+    "${aws_cloudfront_distribution.web.domain_name}"
+  ]
 }
